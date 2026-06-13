@@ -158,7 +158,7 @@ function Header({ unfixed, color, bgColor, dark, fixed, ...props }) {
   }
 
   useEffect(() => {
-    if (typeof window == 'undefined') return
+    if (typeof window === 'undefined') return
 
       if (!unfixed) {
         window.addEventListener('scroll', onScroll)
