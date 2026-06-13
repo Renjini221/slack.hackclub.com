@@ -14,6 +14,8 @@ const formatName = (str) =>
 const getTypeLabel = (type) => {
   if (type === 'us-state') return 'US State'
   if (type === 'island') return 'Island'
+  if (type === 'indian-state')return 'Indian State'
+
   return 'Country'
 }
 
@@ -97,20 +99,24 @@ const FilterButton = ({ active, onClick, children }) => (
     {children}
   </Box>
 )
-
+const handleRandomChannel=()=>{
+  const random=channels[Math.floor(Math.random()*channels.length)]
+  window.open(random.url,'_blank','noopener,noreferrer')
+}
 const ChannelsPage = () => {
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
 
   const filtered = useMemo(() => {
     return channels.filter((c) => {
-      const matchesSearch =
-        c.channel.includes(search.toLowerCase()) ||
-        c.match.includes(search.toLowerCase())
+  const matchesSearch=
+  c.channel.toLowerCase().includes(search.toLowerCase())||
+  c.match.toLowerCase().includes(search.toLowerCase())
       const matchesFilter =
         filter === 'all' ||
         (filter === 'country' && c.type === 'country') ||
         (filter === 'us-state' && c.type === 'us-state') ||
+        (filter === 'indian-state' && c.type==='indian-state') ||
         (filter === 'island' && c.type === 'island')
       return matchesSearch && matchesFilter
     })
@@ -120,7 +126,9 @@ const ChannelsPage = () => {
     all: channels.length,
     country: channels.filter((c) => c.type === 'country').length,
     'us-state': channels.filter((c) => c.type === 'us-state').length,
+    'indian-state':channels.filter((c)=>c.type==='indian-state').length,
     island: channels.filter((c) => c.type === 'island').length
+
   }), [])
 
   return (
@@ -235,6 +243,12 @@ const ChannelsPage = () => {
             </FilterButton>
             <FilterButton active={filter === 'island'} onClick={() => setFilter('island')}>
               Islands ({counts.island})
+            </FilterButton>
+            <FilterButton active={filter==='indian-state'} onClick={()=>setFilter('indian-state')}>
+              Indian States({counts['indian-state']})
+            </FilterButton>
+            <FilterButton active={false} onClick={handleRandomChannel}>
+              Random
             </FilterButton>
           </Box>
         </Box>
