@@ -99,10 +99,7 @@ const FilterButton = ({ active, onClick, children }) => (
     {children}
   </Box>
 )
-const handleRandomChannel=()=>{
-  const random=channels[Math.floor(Math.random()*channels.length)]
-  window.open(random.url,'_blank','noopener,noreferrer')
-}
+
 const ChannelsPage = () => {
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
@@ -247,9 +244,7 @@ const ChannelsPage = () => {
             <FilterButton active={filter==='indian-state'} onClick={()=>setFilter('indian-state')}>
               Indian States({counts['indian-state']})
             </FilterButton>
-            <FilterButton active={false} onClick={handleRandomChannel}>
-              Random
-            </FilterButton>
+          
           </Box>
         </Box>
 
