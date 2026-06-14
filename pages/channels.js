@@ -15,7 +15,6 @@ const getTypeLabel = (type) => {
   if (type === 'us-state') return 'US State'
   if (type === 'island') return 'Island'
   if (type === 'indian-state')return 'Indian State'
-
   return 'Country'
 }
 
@@ -105,10 +104,10 @@ const ChannelsPage = () => {
   const [filter, setFilter] = useState('all')
 
   const filtered = useMemo(() => {
-    return channels.filter((c) => {
-  const matchesSearch=
-  c.channel.toLowerCase().includes(search.toLowerCase())||
-  c.match.toLowerCase().includes(search.toLowerCase())
+   return channels.filter((c) => {
+      const matchesSearch =
+        c.channel.toLowerCase().includes(search.toLowerCase()) ||
+        c.match.toLowerCase().includes(search.toLowerCase())
       const matchesFilter =
         filter === 'all' ||
         (filter === 'country' && c.type === 'country') ||
